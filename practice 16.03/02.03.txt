@@ -1,1 +1,96 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Linq;
+
+namespace ConsoleApp10
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Animal animal1 = new Animal(17, "Lucky");
+            Cat cat1 = new Cat(10, "Bob", 6);
+           
+            animal1.Method();
+            cat1.Print();
+            animal1.Print();
+            Animal lucky = new Cat(9, "Tom", 8);
+            
+            lucky.Method();// cat method(перед по наследств)
+            lucky.Print();
+            Cat cat2 = lucky as Cat;// в cat2  лежит Lucky
+            cat2.Print(); 
+        }
+    }
+    public class Animal
+    {
+        protected string _name;
+        protected int _age;
+        public Animal(int age, string name)
+        {
+            _age = age;
+            _name = name;
+        }
+        public virtual void Method()
+        {
+            Console.WriteLine("method");
+        }
+        public virtual void Voice() 
+        {
+            Console.WriteLine("?");
+        }
+        public void Print()
+        {
+            Console.WriteLine(_name + " " + _age);
+        }
+
+    }
+    public class Cat : Animal
+    {
+        private int _voice;
+        public int Voic => _voice;
+        public Cat(int age, string name, int voice) : base(age, name) 
+        {
+            _age += 4; 
+            _voice = voice;
+        }
+        public override void Method()// переопределяем
+        {
+            Console.WriteLine("cat method");
+        }
+        public override void Voice()
+        {
+            Console.WriteLine("Мяу");
+        }
+        public void Print()
+        {
+            Console.WriteLine(_voice + " " + _age + " " + _name);
+        }
+    }
+    //public class Clothes
+    //{
+    //    protected string _name;
+    //    protected int _size;
+
+
+    //    public Clothes(string name, int size)
+    //    {
+    //        _name = name;
+    //        _size = size;
+    //    }
+
+    //}
+    //public class Skirt: Clothes
+    //{
+    //    private string _material;
+
+    //    public Skirt(string material, string name,int size): base(name, size)
+    //    {
+    //        _material = material;
+    //    }
+    //}
+}
 
