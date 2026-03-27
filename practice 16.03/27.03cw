@@ -1,0 +1,114 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CW5.Variant00
+{
+    public class Task2
+    {
+        public class Number : INumber
+        {
+
+
+            protected double _real;
+
+
+            public double Real => _real;
+            public virtual double Abs => Math.Abs(_real);
+            public int Sign
+            {
+
+                get
+                {
+
+                    if (_real < 0)
+                        return -1;
+                    if (_real > 0)
+                        return 1;
+                    return 0;
+                }
+
+            }
+            public Number(double real)
+            {
+                _real = real;
+            }
+            public virtual void Sum(INumber other)
+            {
+                if (other == null) return;
+
+                _real += other.Real;
+            }
+            public virtual void Div(INumber other)
+            {
+                if (other == null) return;
+
+                if (other.Real == 0)
+                    return;
+                _real /= other.Real;
+            }
+            public virtual void Mul(INumber other)
+            {
+                if (other == null) return;
+
+                _real *= other.Real;
+            }
+
+            public virtual void Sub(INumber other)
+            {
+                if (other == null) return;
+
+                _real -= other.Real;
+
+            }
+            public virtual void Neg()
+            {
+                _real *= -1;
+            }
+
+
+        }
+        public class ComplexNumber : Number, IComplexNumber
+        {
+            private double _imag;
+            public double Imaginary => _imag;
+
+            public int ISign
+            {
+                get
+                {
+                    if (_imag < 0)
+                        return -1;
+                    if (_imag > 0)
+                        return -1;
+                    return 0;
+
+                }
+
+
+            }
+            public override double Abs => Math.Sqrt(_real * _real + _imag * _imag);
+
+            public ComplexNumber(double real, double imag = 0) : base(real) //параметр по умолчанию  
+            {
+                _imag = imag;
+            }
+            public ComplexNumber(INumber other) : base(other.Real)
+            {
+                if (other is ComplexNumber cnum)//если переданное значение (other) является клмплексным 
+                {
+                    _imag = cnum.Imaginary;
+                }
+                else
+                {
+                    _imag = 0;
+                }
+
+
+            }
+
+        }
+    }
+}
