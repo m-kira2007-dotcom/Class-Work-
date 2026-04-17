@@ -1,0 +1,74 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp10
+{
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            //Sum
+            int[] numbers = { 1, 2, 3, 4, 5, };
+            Console.WriteLine(numbers.Sum());
+            int result = numbers.Sum(x => x % 2);//так можно считать все что связанно с суммой(сум остатков)
+
+            string[] world = { "hello", "my", "friend" };
+            result = world.Sum(x => x.Length);//каждый элемент массивва просматриваем и учитываем только его длинну 
+
+
+            Example[] examples = new Example[3];
+            for (int i = 0; i < 3; i++)
+            {
+                examples[i] = new Example(i);
+            }
+            result = examples.Sum(x => x.Num);
+
+
+
+
+            //Any/All
+
+            bool f1=world.Any(x=>x.Length%3==0);
+            Console.WriteLine(f1);
+            bool f2 = world.All(x => x.Length>1);
+            Console.WriteLine(f2);
+
+
+
+            //select,where(Distinct,GroupBy)
+            int[] wordsLenght=world.Select(x=>x.Length).ToArray();//преобразует какждое слово ToArray в массив 
+            string[] longwords=world.Where(x=>x.Length>2).ToArray(); //остаются те что удовлетворяют условия    
+
+
+
+            string word1 = "hello235";
+            char[] wordChar=wordsLenght.ToArray();
+            bool f = wordChars.Any(x => char.IsLetter(x));//IsDigit(x))
+
+
+
+        }
+        public struct Example
+        {
+
+            private int _num;
+            public int Num=>_num;
+
+
+            public Example(int num)
+            {
+                _num=num;
+            }
+        }
+
+       
+        
+
+      
+
+        
+    }
+}
